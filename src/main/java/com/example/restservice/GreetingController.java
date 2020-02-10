@@ -8,11 +8,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 public class GreetingController {
-    private static final String template = "Hello, %s! Welcome aboard.";
+    private static final String template = "Hello, %s! Welcome aboard. You are visitor number %s";
     private final AtomicLong counter = new AtomicLong();
 
     @GetMapping("/greeting")
-    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name){
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+    public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name, @RequestParam(value = "id", defaultValue = "0") Long id){
+            return new Greeting(counter.incrementAndGet(), String.format(template, name, id));
     }
 }
